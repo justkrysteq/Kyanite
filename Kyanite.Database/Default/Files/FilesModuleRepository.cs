@@ -16,7 +16,8 @@ public class FilesModuleRepository : IModuleRepository
 
 	public async Task<IEnumerable<ModuleInformation>> GetAllAsync()
 	{
-		var module = new ModuleInformation {
+		var module = new ModuleInformation
+		{
 			Id = Guid.NewGuid(),
 			Name = "whejh",
 			Type = "wejwkje",
@@ -27,7 +28,8 @@ public class FilesModuleRepository : IModuleRepository
 
 	public async Task<ModuleInformation> GetSingleAsync(Guid id)
 	{
-		var module = new ModuleInformation {
+		var module = new ModuleInformation
+		{
 			Id = Guid.NewGuid(),
 			Name = "whejh",
 			Type = "wejwkje",

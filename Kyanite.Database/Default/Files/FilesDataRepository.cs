@@ -15,7 +15,8 @@ public class FilesDataRepository : IDataRepository
 
 	public async Task<IEnumerable<DataInformation>> GetAllAsync(Guid moduleId)
 	{
-		var module = new DataInformation {
+		var module = new DataInformation
+		{
 			Id = "ewheiu",
 			Value = "whejh",
 			Type = "wejwkje",
@@ -26,7 +27,8 @@ public class FilesDataRepository : IDataRepository
 
 	public async Task<DataInformation> GetSingleAsync(string dataId, Guid moduleId)
 	{
-		var module = new DataInformation {
+		var module = new DataInformation
+		{
 			Id = "ewheiu",
 			Value = "whejh",
 			Type = "wejwkje",

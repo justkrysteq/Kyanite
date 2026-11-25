@@ -1,4 +1,4 @@
-<UserControl x:Class="Kyanite.Database.Default.Files.FilesInitializationView"
+﻿<UserControl x:Class="Kyanite.Database.Default.Files.FilesInitializationView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +8,13 @@
              mc:Ignorable="d">
 
 	<StackPanel Margin="16" Spacing="12">
-		<CheckBox Content="Override default path" IsCheckedChanged="OverrideDefaultPath" IsChecked="False" x:Name="OverrideCheckbox" />
-		<TextBlock VerticalAlignment="Center" Text="Not implemented yet" IsVisible="False" x:Name="OverrideText" />
+		<CheckBox x:Name="OverrideCheckbox"
+		          Content="Override default path"
+		          IsChecked="False"
+		          IsCheckedChanged="OverrideDefaultPath" />
+		<TextBlock x:Name="OverrideText"
+		           VerticalAlignment="Center"
+		           IsVisible="False"
+		           Text="Not implemented yet" />
 	</StackPanel>
 </UserControl>
