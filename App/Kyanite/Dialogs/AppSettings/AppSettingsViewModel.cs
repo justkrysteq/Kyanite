@@ -12,6 +12,7 @@ internal partial class AppSettingsViewModel : ViewModelBase
 	[ObservableProperty] bool _enableNotifications;
 	[ObservableProperty] bool _notifyOnOverdue;
 	[ObservableProperty] bool _keepRunningInBackground;
+	[ObservableProperty] string _modulesDirectory = string.Empty;
 
 	public bool IsDesktop => Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime;
 
@@ -21,5 +22,6 @@ internal partial class AppSettingsViewModel : ViewModelBase
 		EnableNotifications = settings.CurrentAppSettings.EnableNotifications;
 		NotifyOnOverdue = settings.CurrentAppSettings.NotifyOnOverdue;
 		KeepRunningInBackground = settings.CurrentAppSettings.KeepRunningInBackground;
+		ModulesDirectory = settings.CurrentAppSettings.ModulesDirectory ?? Kyanite.Core.Models.AppSettings.DefaultModulesDirectory;
 	}
 }

@@ -1,6 +1,5 @@
 using Kyanite.Core.Dialogs;
 using Kyanite.Core.Services;
-using Kyanite.Database;
 using Kyanite.Modules;
 using Kyanite.Services;
 using Kyanite.ViewModels;
@@ -14,11 +13,6 @@ internal static class ServiceCollectionExtensions
 	internal static IServiceCollection AddCommonServices(this IServiceCollection collection)
 	{
 		collection.AddSingleton<IAppSettingsService, AppSettingsService>();
-
-		// --- database ---
-
-		collection.AddSingleton<DatabaseStackLoader>();
-		collection.AddSingleton<DatabaseStackProvider>();
 
 		// --- modules --- 
 

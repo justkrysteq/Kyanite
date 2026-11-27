@@ -1,17 +1,17 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using Kyanite.Database;
 
 namespace Kyanite.Modules;
 
 public abstract class Module : ObservableObject
 {
-	public Guid ModuleId { get; }
-	public string Name { get; }
+	public ModuleFile File { get; internal set; }
+	public string Name => File.Name;
+	public string Directory => File.Directory;
+	public string DisplayName => Directory.Length == 0 ? Name : $"{Directory} / {Name}";
 
-	protected Module(ModuleInformation moduleInformation)
+	protected Module(ModuleFile file)
 	{
-		ModuleId = moduleInformation.Id;
-		Name = moduleInformation.Name;
+		File = file;
 	}
 
 	public void Refresh()

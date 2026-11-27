@@ -12,12 +12,13 @@ A simple, versatile work management tool designed for personal use, featuring mu
 - 📊 Kanban Board
 - ✅ To-Do List
 
-## Data Synchronization
+## Data Storage
 
-One of the core goals of the app is to provide easy-to-use data synchronization. Currently supported storage options are:
-- **Local Database**
-- **Google Drive** - The database is uploaded to Google Drive on each sync.
-- **Kyanite API** *(Coming soon - v0.3?)*
+Kyanite stores everything as plain files in a modules folder:
+- **Notes** are Markdown files (`.md`).
+- **Other modules** are JSON files (`.json`).
+
+The folder defaults to your local app data and can be changed in Settings. Point it at a synced folder to sync with any file-sync tool.
 
 ## Roadmap (v0.2.0)
 

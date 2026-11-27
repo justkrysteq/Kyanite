@@ -24,6 +24,8 @@
 					<CheckBox Content="Keep app running in the background after closing the window"
 					          IsChecked="{Binding KeepRunningInBackground}"
 					          IsVisible="{Binding IsDesktop}" />
+					<TextBlock Text="Modules folder" />
+					<TextBox Text="{Binding ModulesDirectory}" />
 
 					<TextBlock x:Name="TodoModulesCategory"
 					           HorizontalAlignment="Center"

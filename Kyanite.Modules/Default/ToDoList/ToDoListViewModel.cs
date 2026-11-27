@@ -2,7 +2,6 @@ using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using Kyanite.Core.Dialogs;
 using Kyanite.Core.Services;
-using Kyanite.Database;
 using Kyanite.Modules.Default.ToDoList.Dialogs;
 using System.Collections.ObjectModel;
 
@@ -22,11 +21,11 @@ internal partial class ToDoListViewModel : Module
 	public ObservableCollection<ToDoElement> ToDoElements => _toDoElements;
 
 	public ToDoListViewModel(
-		ModuleInformation moduleInformation,
+		ModuleFile moduleFile,
 		IDialogService dialogService,
 		NotificationServiceProvider notificationServiceProvider,
 		IAppSettingsService appSettingsService)
-		: base(moduleInformation)
+		: base(moduleFile)
 	{
 		_dialogService = dialogService;
 		_notificationServiceProvider = notificationServiceProvider;
@@ -108,7 +107,6 @@ internal partial class ToDoListViewModel : Module
 		ToDoElements.Remove(element);
 	}
 
-	/* This should work when you change .net version to proper one */
 	void ShowNotification(string title, string message)
 	{
 		_notificationServiceProvider.ActiveService?.Show(title, message);
@@ -146,9 +144,9 @@ internal partial class ToDoListViewModel : Module
 	void ApplySorting()
 	{
 		var sorted = ToDoElements.OrderByDescending(e => e.IsPinned)
-			 .ThenBy(e => e.IsCompleted)
-			   .ThenByDescending(e => e.DisplayDate)
-			 .ToList();
+			.ThenBy(e => e.IsCompleted)
+			.ThenByDescending(e => e.DisplayDate)
+			.ToList();
 
 		ToDoElements.Clear();
 		foreach (var item in sorted)

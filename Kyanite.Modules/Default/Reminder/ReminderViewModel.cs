@@ -1,11 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Kyanite.Core.Services;
-using Kyanite.Database;
 
 namespace Kyanite.Modules.Default.Reminder;
 
-public partial class ReminderViewModel(ModuleInformation moduleInformation, NotificationServiceProvider notificationServiceProvider) : Module(moduleInformation)
+public partial class ReminderViewModel(ModuleFile moduleFile, NotificationServiceProvider notificationServiceProvider) : Module(moduleFile)
 {
 	[ObservableProperty] string _notificationTitle = string.Empty;
 	[ObservableProperty] string _notificationDescription = string.Empty;

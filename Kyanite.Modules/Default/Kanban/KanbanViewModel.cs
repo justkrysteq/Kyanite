@@ -1,11 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Kyanite.Database;
 using System.Collections.ObjectModel;
 
 namespace Kyanite.Modules.Default.Kanban;
 
-internal partial class KanbanViewModel(ModuleInformation moduleInformation) : Module(moduleInformation)
+internal partial class KanbanViewModel(ModuleFile moduleFile) : Module(moduleFile)
 {
 	[Synchronize] ObservableCollection<ColumnViewModel> _columns = [];
 	public ObservableCollection<ColumnViewModel> Columns => _columns;

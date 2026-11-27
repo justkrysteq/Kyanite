@@ -4,14 +4,12 @@ using CommunityToolkit.Mvvm.Input;
 using Kyanite.Controls.ErrorInformation;
 using Kyanite.Core.Dialogs;
 using Kyanite.Core.Services;
-using Kyanite.Database;
 using Kyanite.Modules;
 using Kyanite.Services;
 using Kyanite.ViewModels.Main;
 using Kyanite.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Threading.Tasks;
 
 namespace Kyanite.ViewModels;
 
@@ -39,25 +37,14 @@ internal partial class AppViewModel(IServiceProvider serviceProvider) : ViewMode
 		{
 			var moduleManager = serviceProvider.GetRequiredService<ModuleManager>();
 			var shellViewModelProvider = serviceProvider.GetRequiredService<ShellViewModelProvider>();
-			var databaseStackProvider = serviceProvider.GetRequiredService<DatabaseStackProvider>();
 			var appSettingsService = serviceProvider.GetRequiredService<IAppSettingsService>();
 
-			//async void: any exception thrown here (failed save, offline upload) would abort the process and lose the session
+			//async void: any exception thrown here (failed save) would abort the process and lose the session
 			try
 			{
-
-				//app is not configured; close the app
-				if (databaseStackProvider.ActiveStack is null)
-				{
-					desktop.Shutdown();
-					return;
-				}
-
 				if (shellViewModelProvider.TryRetriveShellCurrentViewModel(out MainViewModel mainViewModel) &&
 					mainViewModel.SelectedModule is not null)
 					await moduleManager.SaveModule(mainViewModel.SelectedModule);
-
-				await databaseStackProvider.ActiveStack.OnWindowClosing();
 
 				moduleManager.ClearData();
 				shellProvider.DisposeShell();
@@ -76,12 +63,9 @@ internal partial class AppViewModel(IServiceProvider serviceProvider) : ViewMode
 					.WithViewModel(new ErrorInformationViewModel(ex.Message))
 					.AddCloseButton()
 					.BuildAndShow();
+
+				return;
 			}
-
-			await databaseStackProvider.ActiveStack.OnWindowClosing();
-
-			moduleManager.ClearData();
-			shellProvider.DisposeShell();
 
 			if (appSettingsService.CurrentAppSettings.KeepRunningInBackground)
 				desktop.MainWindow = null;
@@ -93,22 +77,8 @@ internal partial class AppViewModel(IServiceProvider serviceProvider) : ViewMode
 	}
 
 	[RelayCommand]
-	async Task CloseApplication()
+	void CloseApplication()
 	{
-		//save current module if any
-		var mainViewModel = serviceProvider.GetRequiredService<MainViewModel>();
-
-		if (mainViewModel.SelectedModule is not null)
-		{
-			var moduleManager = serviceProvider.GetRequiredService<ModuleManager>();
-			await moduleManager.SaveModule(mainViewModel.SelectedModule);
-		}
-
-		DatabaseStackProvider databaseStackProvider = serviceProvider.GetRequiredService<DatabaseStackProvider>();
-
-		if (databaseStackProvider.ActiveStack is not null)
-			await databaseStackProvider.ActiveStack.OnWindowClosing();
-
 		if (Application.Current!.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
 			desktop.Shutdown();
 	}

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kyanite.Database\Kyanite.Database.csproj" />
+    <ProjectReference Include="..\Kyanite.Core\Kyanite.Core.csproj" />
   </ItemGroup>
 
 </Project>

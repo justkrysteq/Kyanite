@@ -1,11 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Kyanite.Core.Dialogs;
-using Kyanite.Core.Services;
-using Kyanite.Database;
-using Kyanite.Exceptions;
-using Kyanite.Services;
-using Kyanite.ViewModels.InitialConfiguration;
 using Kyanite.ViewModels.Main;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,7 +8,7 @@ using System;
 namespace Kyanite.ViewModels;
 
 /// <summary>
-/// controls what content is now display, main page or database initalizaiton page
+/// controls what content is now displayed
 /// </summary>
 internal partial class ShellViewModel : ViewModelBase
 {
@@ -21,12 +16,10 @@ internal partial class ShellViewModel : ViewModelBase
 
 	public IDialogService DialogService { get; }
 	readonly IServiceProvider _serviceProvider;
-	readonly IAppSettingsService _appSettingsService;
 
-	public ShellViewModel(IServiceProvider serviceProvider, IAppSettingsService appSettingsService, IDialogService dialogService)
+	public ShellViewModel(IServiceProvider serviceProvider, IDialogService dialogService)
 	{
 		_serviceProvider = serviceProvider;
-		_appSettingsService = appSettingsService;
 		DialogService = dialogService;
 
 		UpdateView();
@@ -40,15 +33,6 @@ internal partial class ShellViewModel : ViewModelBase
 
 	public void UpdateView()
 	{
-		if (_appSettingsService.CurrentAppSettings.DatabaseInformationInitialized)
-			CurrentViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-		else
-			CurrentViewModel = new InitialConfigurationViewModel(
-				_serviceProvider,
-				shellViewModel: this,
-				_appSettingsService,
-				_serviceProvider.GetRequiredService<DatabaseStackLoader>(),
-				_serviceProvider.GetRequiredService<DatabaseStackProvider>()
-			);
+		CurrentViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
 	}
 }
