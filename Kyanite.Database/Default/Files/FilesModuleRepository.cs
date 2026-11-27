@@ -12,7 +12,7 @@ public class FilesModuleRepository(string databaseDirPath) : IModuleRepository
 			type: {module.Type}
 			name: {module.Name}
 			---
-			""";
+			""" + Environment.NewLine;
 
 		var filePath = Path.Combine(_databaseDirPath, $"{moduleWithId.Id}.md");
 
