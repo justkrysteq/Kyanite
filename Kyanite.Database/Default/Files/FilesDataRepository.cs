@@ -1,14 +1,12 @@
 namespace Kyanite.Database.Default.Files;
 
-public class FilesDataRepository : IDataRepository
+public class FilesDataRepository(string databaseDirPath) : IDataRepository
 {
-	public void Initialize()
-	{
-
-	}
+	readonly string _databaseDirPath = databaseDirPath;
 
 	public async Task<DataInformation> AddAsync(DataInformation data, Guid moduleId)
 	{
+
 
 		return data;
 	}
