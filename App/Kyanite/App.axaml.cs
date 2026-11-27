@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Styling;
 using Kyanite.Core.Services;
 using Kyanite.Services;
 using Kyanite.ViewModels;
@@ -19,6 +20,10 @@ public partial class App : Application
 	public override void Initialize()
 	{
 		AvaloniaXamlLoader.Load(this);
+
+		// Force dark theme
+		Application.Current!.RequestedThemeVariant = ThemeVariant.Dark;
+
 		// override font for PleasantUI library
 		PleasantSettings.Current!.Font = (FontFamily)Resources["Unbounded"]!;
 	}
