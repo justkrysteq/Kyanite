@@ -108,7 +108,6 @@ internal partial class ToDoListViewModel : Module
 		ToDoElements.Remove(element);
 	}
 
-	/* This should work when you change .net version to proper one */
 	void ShowNotification(string title, string message)
 	{
 		_notificationServiceProvider.ActiveService?.Show(title, message);
@@ -146,9 +145,9 @@ internal partial class ToDoListViewModel : Module
 	void ApplySorting()
 	{
 		var sorted = ToDoElements.OrderByDescending(e => e.IsPinned)
-			 .ThenBy(e => e.IsCompleted)
-			   .ThenByDescending(e => e.DisplayDate)
-			 .ToList();
+			.ThenBy(e => e.IsCompleted)
+			.ThenByDescending(e => e.DisplayDate)
+			.ToList();
 
 		ToDoElements.Clear();
 		foreach (var item in sorted)

@@ -1,3 +1,5 @@
+using static Kyanite.Core.KyanitePaths;
+
 namespace Kyanite.Database.Default.Files;
 
 public class FilesDatabaseStack : DatabaseStack
@@ -5,7 +7,7 @@ public class FilesDatabaseStack : DatabaseStack
 	const string databaseDirName = "modules";
 	string DatabaseDirPath { get; }
 
-	public FilesDatabaseStack() : this(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Kyanite", databaseDirName)) { }
+	public FilesDatabaseStack() : this(Path.Combine(KyaniteDataDir, databaseDirName)) { }
 
 	private FilesDatabaseStack(string databaseDirPath) : base(new FilesModuleRepository(databaseDirPath), new FilesDataRepository(databaseDirPath))
 	{

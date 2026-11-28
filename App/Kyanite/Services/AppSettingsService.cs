@@ -3,21 +3,15 @@ using Kyanite.Core.Services;
 using System;
 using System.IO;
 using System.Text.Json;
+using static Kyanite.Core.KyanitePaths;
 
 namespace Kyanite.Services;
 
 internal class AppSettingsService : IAppSettingsService
 {
-	readonly string AppDataDirectory = Path.Combine(
-			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-			"Kyanite"
-		);
+	readonly string AppDataDirectory = KyaniteDataDir;
 
-	readonly string FullPathToSetingsFile = Path.Combine(
-			Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-			"Kyanite",
-			"settings.json"
-		);
+	readonly string FullPathToSetingsFile = Path.Combine(KyaniteDataDir, "settings.json");
 
 	public AppSettings CurrentAppSettings { get; private set; } = new();
 

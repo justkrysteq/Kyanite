@@ -1,5 +1,6 @@
 using Dapper;
 using Microsoft.Data.Sqlite;
+using static Kyanite.Core.KyanitePaths;
 
 namespace Kyanite.Database.Default.Local;
 
@@ -52,10 +53,5 @@ public class LocalDatabaseStack()
 		=> new LocalInitializationViewModel();
 
 	protected static string GetFilePath()
-	{
-		var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-		var path = Path.Combine(appData, DatabaseFilename);
-
-		return path;
-	}
+		=> Path.Combine(KyaniteDataDir, DatabaseFilename);
 }
